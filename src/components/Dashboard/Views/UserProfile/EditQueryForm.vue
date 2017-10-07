@@ -6,76 +6,113 @@
     <div class="content">
       <form>
         <div class="row">
-          <div class="col-md-3">
-            <fg-input type="date"
-                      label="Date From"
-                      placeholder="15/10/2015"
-                      v-model="user.username">
-            </fg-input>
+          <div class="col-md-6">
+            <label for='Date From'> Date From</label>
+            <input type="date"
+                      id = "Date From"
+                      v-model="patient.startDate">
           </div>
-          <div class="col-md-4">
-            <fg-input type="date"
-                      label="Date To"
-                      placeholder="15/10/2016"
-                      v-model="user.email">
-            </fg-input>
+          <div class="col-md-6">
+            <label for='Date To'> Date To</label>
+            <input type="date"
+                      id = "Date To"
+                      v-model="patient.endDate">
           </div>
         </div>
         <h4 class="title">Data to include</h4>
         <div class="row">
           <div class="col-md-4">
-            <fg-input type="checkbox"
+            <input type="checkbox"
                       label="Accelerometer"
-                      v-model="user.firstName">
-            </fg-input>
+                      id="Accelerometer"
+                      v-model="patient.accelerometer">
+            <label for='accelerometer'>Accelerometer</label>
           </div>
           <div class="col-md-4">
-            <fg-input type="checkbox"
-                      label="Gyro"
-                      v-model="user.lastName">
-            </fg-input>
+            <input type="checkbox"
+                      id="gyro"
+                      v-model="patient.gyro">
+            <label for='gyro'> Gyro</label>
           </div>
           <div class="col-md-4">
-            <fg-input type="checkbox"
-                      label="Medication"
-                      v-model="user.lastName">
-            </fg-input>
+            <input type="checkbox"
+                      id="Medication"
+                      v-model="patient.medication">
+            <label for='Medication'>Medication</label>
+          </div>
+        </div>
+        <h4 class="title">Analytics</h4>
+        <div class="row">
+          <div class="col-md-4">
+            <input type="checkbox"
+                      id="Clusters"
+                      v-model="patient.cluster">
+            <label for='Clusters'>Cluster</label>
+          </div>
+          <div class="col-md-4">
+            <input type="checkbox"
+                      id="Time Series"
+                      v-model="patient.timeseries">
+            <label for='Time Series'>Time Series</label>
           </div>
         </div>
         <div class="text-center">
-          <button type="submit" class="btn btn-info btn-fill btn-wd" @click.prevent="updateProfile">
+          <button type="submit" class="btn btn-info btn-fill btn-wd" @click="requestData">
             Run Query
           </button>
         </div>
         <div class="clearfix"></div>
       </form>
     </div>
+    <div class="Chart_container">
+      <div class="Chart_title">
+        <h4 class="title">Query Result</h4>
+        <hr>
+      </div>
+      <div class="Chart_content">
+        <line-chart v-if="loaded" :chart-data="requestedData" :chart-labels="labels"></line-chart>
+      </div>
+    </div>
   </div>
 </template>
 <script>
+  import LineChart from '../../../UIComponents/Cards/LineChart'
   export default {
+    components: {
+      LineChart
+    },
     data () {
       return {
-        user: {
-          company: 'Paper Dashboard',
-          username: 'michael23',
-          email: '',
-          lastName: 'Faker',
-          address: 'Melbourne, Australia',
-          city: 'melbourne',
-          postalCode: '',
-          aboutMe: `Oh so, your weak rhyme. You doubt I'll bother, reading into it.I'll probably won't, left to my own devicesBut that's the difference in our opinions.`
+        loaded: false,
+        requestedData: [],
+        labels: [],
+        patient: {
+          timeseries: false,
+          cluster: false,
+          medication: false,
+          gyro: false,
+          accelerometer: false,
+          startDate: null,
+          endDate: null
         }
       }
     },
     methods: {
-      updateProfile () {
-        alert('Your data: ' + JSON.stringify(this.user))
+      requestData () {
+        console.log(this.patient)
       }
     }
   }
 
 </script>
 <style>
+
+  .Chart_title {
+    padding: 20px;
+  }
+
+  form {
+    padding:30px;
+  }
 
 </style>

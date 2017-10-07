@@ -31,6 +31,11 @@ const routes = [
         path: 'stats',
         name: 'stats',
         component: UserProfile
+      },
+      {
+        path: 'UPDRS',
+        name: 'UPDRS',
+        component: TableList
       }
     ]
   },

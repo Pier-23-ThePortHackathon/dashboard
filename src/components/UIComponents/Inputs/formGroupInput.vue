@@ -18,7 +18,7 @@
       name: String,
       disabled: Boolean,
       placeholder: String,
-      value: [String, Number]
+      value: [String, Number, Boolean]
     }
   }
 

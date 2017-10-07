@@ -1,6 +1,7 @@
 <template>
     <div class="row">
       <div class="col-md-12">
+
         <div class="card">
           <div class="header">
             <h4 class="title">320+ Themify Icons</h4>

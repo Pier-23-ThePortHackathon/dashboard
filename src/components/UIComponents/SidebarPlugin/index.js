@@ -12,6 +12,11 @@ const SidebarStore = {
       name: 'Query View',
       icon: 'ti-user',
       path: '/admin/stats'
+    },
+    {
+      name: 'UPDRS',
+      icon: 'ti-archive',
+      path: '/admin/UPDRS'
     }
   ],
   displaySidebar (value) {
